@@ -1,0 +1,16 @@
+$len = 19;
+$text = "怎么将新闻的很长的标题只显示前面一些字，后面用.....来代替？";
+echo strlen($text)<=$len ? $text : (substr($text,0,$len).chr(0)."....");
+
+function mysubstr($str, $start, $len) {//$str要截取的字符串，$start开始位置，$len截取长度
+    $tmpstr = "";
+    $strlen = $start + $len;
+    for($i = 0; $i < $strlen; $i++) {
+        if(ord(substr($str, $i, 1)) > 0xa0) {
+            $tmpstr .= substr($str, $i, 2);
+            $i++;
+        } else
+            $tmpstr .= substr($str, $i, 1);
+    }
+    return $tmpstr;
+}

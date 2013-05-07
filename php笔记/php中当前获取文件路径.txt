@@ -1,0 +1,20 @@
+php中当前获取文件路径的方法是：
+__FILE__ 是当前路径+文件名
+dirname(__FILE__)返回当前文件路径的路径部分
+例如当前文件是 /home/data/demo/demo.php ，则 __FILE__ 得到的就是完整路径
+即/home/data/demo/demo.php ，而dirname(__FILE__)得到路径部分 即/home/data/demo
+
+PHP获取当前文件路径,上层目录路径 
+
+取的現在檔案、目錄、上層目錄 
+於 test.php 內, 要做取得路徑、目錄等, 可見下述: 
+取得 路徑 + 檔名 (要取得 /var/www/project/test.php) 
+    * echo __FILE__; 
+取得 檔名 (要取得 test.php) 
+    * echo basename(__FILE__); 
+取得 不含附檔名的檔名 (要取得 test) 
+    * echo basename(__FILE__, '.php'); 
+取得 到此目錄前的完整 PATH, 不含檔名 (要取得 /var/www/project) 
+    * echo dirname(__FILE__); 
+取得 到上層目錄前的完整 PATH (要取得 /var/www) 
+    * echo dirname(dirname(__FILE__)); 

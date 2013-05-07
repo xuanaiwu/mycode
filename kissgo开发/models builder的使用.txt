@@ -1,0 +1,10 @@
+1.自动递增对应的是serial。
+2.auto insert 对应int型时是自动插入用户UID
+  auto insert 对应日期型，在新增记录时自动插件相应的日期格式
+3.auto update 对应int 型时自动更新UID
+  auto update 对应日期型，在修改时自动更新相应的日期
+暂时只有自动插入uid和日期
+IDX是索引,UDX是唯一.
+$schema->addPrimarykey (array('link_id'));//主键
+$schema->addIndex ('IDX_display' , array('display'));//索引
+  

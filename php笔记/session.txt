@@ -1,0 +1,39 @@
+$_SESSION[name]="admin";
+echo $_SESSION[name];
+
+<?php 
+session_start();
+if ($_GET[out]=="out") {
+	unset($_SESSION[id]);
+	unset($_SESSION[pass]);
+	//$_SESSION[id]="";
+	//$_SESSION[name]="";
+	//echo "<script>location.href='login.php';</script>";
+}
+if ($_POST[name]&&$_POST[password]) {
+	$_SESSION[id]=$_POST[name];
+	$_SESSION[pass]=$_POST[password];
+	//echo "<script>location.href='login.php';</script>";
+}
+if ($_SESSION[id]&&$_SESSION[pass]) {
+	echo "登录成功<br>用户名：".$_SESSION[id]."<br>密码：".$_SESSION[pass];
+	echo "<a href='login.php?out=out'>退出</a>";
+}
+
+
+
+?>
+Session的配置与应用:
+
+
+session_start();                    //初始化session.需在文件头部
+
+$_SESSION[name]=value;  //配置Seeeion
+
+echo $_SESSION[name];    //使用session
+
+isset($_SESSION[name]);   // 判断
+
+unset($_SESSION[name]);   //删除
+
+session_destroy()；             //消耗所有session

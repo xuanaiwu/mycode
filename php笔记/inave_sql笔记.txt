@@ -1,0 +1,2 @@
+用户表和帖子表关联查询：
+select b.subject from mybb_users a left join mybb_posts b on a.uid=b.uid where a.uid='1';

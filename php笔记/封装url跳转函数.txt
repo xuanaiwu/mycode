@@ -1,0 +1,41 @@
+ /**
+  * Function redirect
+  * 重定向浏览器到指定的 URL
+  * @param string $url 要重定向的 url
+  * @param int $delay 等待多少秒以后跳转
+  * @param bool $js 指示是否返回用于跳转的 JavaScript 代码
+  * @param bool $jsWrapped 指示拼接javascript代码
+  * @param bool $return 指示是否返回生成的 JavaScript 代码
+  */
+function  redirect($url,$delay=0,$js=FALSE,$jsWarpped=TRUE,$return=FALSE){
+	$delay=(int)$delay;
+	if (!$js) {
+		if (headers_sent()||$delay>0) {
+			echo "<html><head><meta http-equiv='refresh' content='{$delay}URL={$url}' /></head></html>";
+			exit;
+		}else {
+			header("Location:{$url}");
+			exit;
+		}
+	}
+	$out="";
+	if ($jsWarpped) {
+		$out.="<script language='JavaScript' type='text/javascript'>";
+	}
+	$url=rawurldecode($url);
+	if ($delay>0) {
+		$out.="window.setTimeOut(function(){
+				document.location='{$url}';
+	},{$delay});";
+	}else {
+		$out.="document.location='{$url}'";
+	}
+	if ($jsWarpped) {
+		$out.="</script>";
+	}
+	if ($return) {
+		return $out;
+	}
+	echo $out;
+	exit;
+}

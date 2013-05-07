@@ -1,0 +1,53 @@
+多态的意思是“多种形态”，是具有表现多种形态的能力的特征。
+instanceof 判断给定对象是否来自指定的对象类。
+
+interface  myusb{
+	
+	function type();
+	function alert();
+	
+}
+class zip implements  myusb{
+	function type(){
+		echo "2.0";
+	}
+	function alert(){
+		echo "正在检查U盘驱动";
+		
+	}
+	
+}
+class mp3 implements myusb{
+	function type(){
+		echo "1.0";
+	}
+	function alert(){
+		echo "正在检查MP3Q驱动";
+		
+	}
+	
+}
+class mypc {
+	/* function alert(){
+	echo 	"112";
+	
+	}
+	function type(){
+		echo "223";
+	
+	} */
+	
+	function pcusb($what){
+		$what->type()."<br />";
+		$what->alert();
+		
+	}
+
+	function __toString(){
+		echo "22";
+	}
+}
+$pc=new  mypc();
+$b=clone $pc;
+$zip=new zip();
+echo $b->pcusb($zip);

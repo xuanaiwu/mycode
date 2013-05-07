@@ -1,0 +1,35 @@
+class mypc {
+	/* function alert(){
+	echo 	"112";
+	
+	}
+	function type(){
+		echo "223";
+	
+	} */
+	public $name="我的电脑";
+	
+	function pcusb($what){
+		$what->type()."<br />";
+		$what->alert();
+		
+	}
+	function __tostring(){
+		return  $this->name."没开电脑。";
+	}
+	function __call($n,$v){
+		echo "不存在的方法为：".$n."&nbsp;";
+		echo "错误的值。";
+	}
+	function __destruct(){
+		echo "<br />清理一个对象";
+	}
+	function __clone(){
+		$this->name="你的电脑";
+	}
+}
+$pc=new  mypc();
+$b=clone $pc;
+$zip=new zip();
+echo $pc->name;
+echo $b->name;

@@ -1,0 +1,56 @@
+<?php
+		$servername="127.0.0.1:3306";
+		$username="root";
+		$password="root";
+		$db=mysql_connect($servername,$username,$password);
+		mysql_query("set names  'gb2312'");
+		$pagesize=1;//设定每页显示的记录数
+		$page=1;//设定第一页
+		if(!$db){
+			die('Could not connect:'.mysql_error());
+		}
+		mysql_select_db("mybb",$db);
+		$sql1="select count(*) from mybb_posts";
+		$rs=mysql_query($sql1,$db);//总记录数
+		$myrow=mysql_fetch_array($rs);
+		$numrows=$myrow[0];
+		$pages=intval($numrows/$pagesize);//总页数
+		if ($numrows%$pagesize) {
+			$pages++;
+		}
+		if ($_GET['page']!=null||$_GET['page'!=""]) {
+			if ($_GET['page']>$pages||$_GET['page']<=0) {
+				$strTemp="<br /><div align='center'>该页面不存在！";
+				$strTemp=$strTemp."<a href='phpinfo.php'>返回首页</a></div><br />";
+				echo $strTemp;
+				return;
+			}
+		}
+		if (isset($_GET['page'])) {
+			$page=intval($_GET['page']);
+		}else {
+			$page=1;
+		}
+		$offset=$pagesize*($page-1);
+		$sql2="select username,subject,message from mybb_posts order by tid desc limit $offset,$pagesize";
+		$result=mysql_query($sql2,$db);
+		//echo "result:".$result."<br />";
+		while ($row=mysql_fetch_array($result)){
+			$strHtml="<div id='nifty'><div class='rtop'><div class='r1'></div><div class='r2'></div><div class='r3'></div><div class='h4'>
+							</div></div><div class='item'><div class='illustration'><p class='caption'>作者：".$row['username']."</p>
+					</div><h4>".$row['subject']."</h4><p>".$row['message']."</p>
+			</div><div class='rtop'><div class='r4'></div><div class='r3'></div><div class='r2'></div><div class='r1'></div></div></div><br />";
+			echo $strHtml;
+			//echo $row['subject']."".$row['message'];
+			//echo "<br />";		
+		}
+		if ($result!=null&&$result!="") {
+			for ($i=1;$i<=$pages;$i++){
+				$strPage="<div  class='page'><span><a href='phpinfo.php?page=".$i."'>".$i."</a></span><div>";
+				echo $strPage;
+			}
+			$strPage="<div class='page'><span>当前是第".$page."页</span></div>";
+			echo $strPage;
+		}	
+		mysql_close($db);
+?>

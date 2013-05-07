@@ -1,0 +1,21 @@
+<!--”√ªßµ«¬º-->
+				<div class="bk10"></div>
+				<div class="box">
+	        	 <h5 class="title-2">”√ªßµ«¬º<a href="" class="more">&nbsp;</a></h5>
+	             <div class="content">
+	               <form method="post" action="index.php?m=member&c=index&a=login">
+				            <div class="input">
+				                <label>’ ∫≈£∫</label><input type="text" id="username" name="username" size="22" class="input-text">
+				            </div>
+				            <br />
+				            <div class="input">
+				                <label>√‹¬Î£∫</label><input type="password" id="password" name="password" size="22" class="input-text">
+				            </div>
+				             <br />
+				            <div class="input">
+				                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><div class="submit"><input type="submit" name="dosubmit" id="dosubmit" value="{L('login')}"></div>
+				                <label>&nbsp;</label><div class="submit"><input type="submit" name="dosubmit" id="dosubmit" value="{L('login')}"></div>
+				            </div>
+	        		</form>
+	              </div>
+	       	     </div>

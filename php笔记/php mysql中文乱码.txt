@@ -1,0 +1,5 @@
+php页面：header("Content-Type: text/html;charset=utf-8");
+
+在选择数据库后加：
+mysql_query("set character set 'utf8'");//读库 
+mysql_query("set names 'utf8'");//写库 

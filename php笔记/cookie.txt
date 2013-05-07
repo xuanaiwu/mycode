@@ -1,0 +1,45 @@
+if ($_GET[out]=="out") {
+	setcookie('id','');
+	setcookie('pass','');
+	echo "<script>location.href='login.php';</script>";
+}
+if ($_POST[name]&&$_POST[password]) {
+	setcookie('id',$_POST[name],time()+3600);
+	setcookie('pass',$_POST[password],time()+3600);
+	echo "<script>location.href='login.php';</script>";
+}
+if ($_COOKIE[id]&&$_COOKIE[pass]) {
+	echo "登录成功<br>用户名：".$_COOKIE[id]."<br>密码：".$_COOKIE[pass];
+	echo "<a href='login.php?out=out'>退出</a>";
+}
+
+Cookie的配置与应用
+
+Setcookie(string name, string value, int expire,string path, string domain, int secure); 
+其中name是cookie变量名称标识，你在php中将能象使用普通变量名相同来用他引用cookie变量。value是cookie变量的初始值，expire 表示该cookie变量的有效时间；path 为该cookie变量的相关路径；domain 表示cookie变量的网站；secure 则需在 https 的安全传输时才有效。
+
+eg:SetCookie("Cookie", "cookievalue",time()+3600, "/forum", ".php100.com", 1);
+
+接收和处理Cookie
+
+　　PHP对Cookie的接收和处理的支持非常好，是完全自动的，跟FORM变量的原则一样，特别简单。
+比如设置一个名为 MyCookier的Cookie，PHP会自动从WEB服务器接收的HTTP头里把它分析出来，并形成一个与普通变量一样的变量，名为$ myCookie，这个变量的值就是Cookie的值。数组同样适用。另外一个办法是引用PHP的全局变量$HTTP_COOKIE_VARS数组。
+分别举例如下：（假设这些都在以前的页面里设置过了，并且仍然有效）
+
+echo $MyCookie;
+echo $CookieArray[0];
+echo $_COOKIE["MyCookie"]; 
+echo $HTTP_COOKIE_VARS["MyCookie"]; 
+
+删除Cookie
+
+要删除一个已经存在的Cookie，有两个办法：
+
+1、SetCookie("Cookie", "");
+2、SetCookie("Cookie", "value" , time()-1 / time() );
+
+使用Cookie的限制
+
+1、必须在HTML文件的内容输出之前设置；
+2、不同的浏览器对Cookie的处理不一致，且有时会出现错误的结果。
+3、限制是在客户端的。一个浏览器能创建的Cookie数量最多为30个，并且每个不能超过4KB，每个WEB站点能设置的Cookie总数不能超过20个。

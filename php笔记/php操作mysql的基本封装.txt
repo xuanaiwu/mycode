@@ -1,0 +1,100 @@
+class DataBase
+{
+        private $host = "";//主机地址
+        private $user = "";//数据库用户名
+        private $password = "";//对应的密码
+        private $database = "";//要操作的数据库
+        //==================================Begin=====================================
+        private function TransSpeciaChars($v_string)//对特色字符的处理
+        {
+                $t_buff = $v_string;
+                $t_buff = str_replace("\r","",$t_buff);
+                $t_buff = str_replace("\n","",$t_buff);
+                $t_buff = addcslashes($t_buff, "\\");
+                $t_buff = addcslashes($t_buff, "\'");
+                $t_buff = iconv("gb2312","utf-8", $t_buff);
+                $t_buff = htmlspecialchars($t_buff);
+                return $t_buff;
+        }
+        //--------------------------------------------------------------------------
+        function DataBase($v_host, $v_user, $v_password, $v_dataBase)
+        {
+                $this->host = $v_host;
+                $this->user = $v_user;
+                $this->password = $v_password;
+                $this->dataBase = $v_dataBase;
+                
+                $t_error = "无法连接到数据库，请检查数据库是否启动！";
+                $t_mysqlConn = mysql_connect($this->host, $this->user, $this->password) or die($t_error);
+                mysql_select_db($this->dataBase, $t_mysqlConn);
+        }
+        //--------------------------------------------------------------------------
+        function Select($v_sql)//返回二维数组类型字符串的结果
+        {
+                $ret = '[';
+                $flag = true;
+                $t_results = mysql_query($v_sql);
+                $t_len = mysql_num_fields($t_results);
+                while($row = mysql_fetch_array($t_results))
+                        {
+                        if(true == $flag)
+                                {
+                                $ret .= '[';
+                                for($i=0; $i<$t_len; $i++)
+                                        {
+                                        $row[$i] = $this->TransSpecialChars($row[$i]);
+                                        if($i == 0)
+                                                $ret .= '"' . $row[$i] . '"';
+                                        else
+                                                $ret .= ',"' . $row[$i] . '"';
+                                         }
+                                $ret .= ']';
+                                $flag = false;
+                                }
+                        else
+                                {
+                                $ret .= ',[';
+                                for($i=0; $i<$t_len; $i++)
+                                        {
+                                        $row[$i] = $this->TransSpecialChars($row[$i]);
+                                        if(0 == $i)
+                                                $ret .= '"' . $row[$i] . '"';
+                                        else
+                                                $ret .= ',"' . $row[$i] . '"';
+                                         }
+                                $ret .= ']';
+                                }
+                        }
+                $ret .= ']';
+                return $ret;
+        }
+        //-----------------------------------------------------------------------
+        function Insert()
+        {
+                //"insert into 数据表(字段1，字段2，字段3...) values(值1，值2，值3...)"
+                //"insert into 目标数据表 (select * from 源数据表)"    (把源数据表的记录添加的目标数据表)
+                mysql_query($v_sql);
+        }
+        //-----------------------------------------------------------------------
+        function Delete($v_sql)
+        {
+                //"delete from 数据表 where 条件表达式"
+                //"delete from 数据表"  (将数据表所有记录删除)
+                mysql_query($v_sql);
+        }
+        //-------------------------------------------------------------------------
+        function Update($v_sql)
+        {
+                //"update 数据表 set 字段名=字段值 where 条件表达式"
+                //"update 数据表 set 字段1=值1，字段2=值2...字段n=值n  条件表达式"
+                mysql_query($v_sql);
+        }
+        //--------------------------------------------------------------------------
+        function GetRecordCount($v_sql)
+        {
+                $t_results = mysql_query($v_sql);
+                $t_numRows = mysql_num_rows($t_results);
+                return $t_numRows;
+        }
+        //==================================End=======================================
+}

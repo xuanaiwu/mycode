@@ -1,0 +1,3 @@
+1：在要调试的地方断点
+2：在firefox 右击选择zend studio 的debug或者是debug next page
+3：进入zend studio调试页面，然后按f6下一步或者按f5单步跳入进行调试。

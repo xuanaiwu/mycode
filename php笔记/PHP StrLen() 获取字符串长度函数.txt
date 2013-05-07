@@ -1,0 +1,3 @@
+$str1="/home/data/lost+found/www/uploadfile/2013/0427/20130427043035356.jpg";
+$str2="/home/data/lost+found/www/uploadfile/";
+echo strlen($str1)-strlen($str2);

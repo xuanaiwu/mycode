@@ -1,0 +1,1 @@
+showmessage(L('authorize_failure'), 'index.php?m=member&c=index&a=login');
