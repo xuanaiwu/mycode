@@ -1,0 +1,8 @@
+CentOS系统修改mysql中root的密码：
+shell>mysql -u root -p 
+mysql> update user set password=password(”xueok654123″) where user=’root’; 
+mysql> flush privileges //刷新数据库 
+mysql>use dbname； 打开数据库： 
+mysql>show databases; 显示所有数据库 
+mysql>show tables; 显示数据库mysql中所有的表：先use mysql；然后 
+mysql>describe user; 显示表mysql数据库中user表的列信息）；

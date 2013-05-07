@@ -1,0 +1,14 @@
+1.查询全部学生的信息
+     select * from student
+2.从学生表中查询学生的学号与姓名
+    select  sno,sname from student
+3.从学生选课表中查询选课课程号
+   select distinct cno from s_choose
+4.查询所有学生的信息，要求只显示前10行数据
+   select top 10 * from student
+5.查询所有学生的信息，要求只显示前10%数据
+  	select  top 10 percent from student
+6.使用AS、=命名列　
+	select  cno as ‘课程号’ from s_choose  
+    select 课程号=cno from  s_choose  
+    select  cno  课程号 from s_choose
