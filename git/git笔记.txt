@@ -1,0 +1,32 @@
+$cd  ~/.ssh    //检查计算机ssh密钥
+如果没有提示:No such file or directory 说明你不是第一次使用git,执行下面的操作,清理原有ssh密钥。
+$ls  //列车当前目录所有目录和文件
+$mkdir key_backup //创建一个文件夹
+$cp id_rsa* key_backup //复制文件到key_backup
+$rm id_rsa* //删除id_rsa文件
+获得密钥：
+ssh-keygen -t rsa -C "defnngj@gmail.com"//填写email地址，然后一直“回车”，输入密码，ok。
+打开本地..\.ssh\id_rsa.pub文件。此文件里面内容为刚才生成人密钥。
+登陆github系统。点击右上角的 Account Settings--->SSH Public keys ---> add another public keys。
+把你本地生成的密钥（全部内容）复制到里面（key文本框中）， 点击 add key 就ok了。
+接着打开git ，测试连接是否成功
+$ ssh -T git@github.com
+输入刚才输入的密码，如果刚才有输入的话。
+如果提示：Hi defnngj You've successfully authenticated, but GitHub does not provide shell access. 说明你连接成功了。
+
+
+本地git操作：
+git init //创建本地git库
+git add . //添加所以文件到本地git库
+git commit -m "xx" //提交刚才添加的文件到本地git库相当于数据事务commit.
+
+远程github操作：
+
+$ git remote add origin git@github.com:defnngj/hibernate-demo.git //将本地git库和远程github库设置关联，前提是无文件冲突。
+
+git clone git@github.com:xuanaiwu/coolweather.git //下载代码，如果本地有git库会造成误操作
+
+git push origin master //同步本地git库代码到对应的远程github库
+git pull origin master //将远程github库上的代码同步到本地git库
+
+
