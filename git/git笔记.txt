@@ -22,11 +22,18 @@ git commit -m "xx" //提交刚才添加的文件到本地git库相当于数据事务commit.
 
 远程github操作：
 
-$ git remote add origin git@github.com:defnngj/hibernate-demo.git //将本地git库和远程github库设置关联，前提是无文件冲突。
+$ git remote add origin git@github.com:xuanaiwu/wechatcms.git //将本地git库和远程github库设置关联，前提是无文件冲突。
 
-git clone git@github.com:xuanaiwu/coolweather.git //下载代码，如果本地有git库会造成误操作
+$ git clone git@github.com:xuanaiwu/coolweather.git //下载代码，如果本地有git库会造成误操作
 
-git push origin master //同步本地git库代码到对应的远程github库
-git pull origin master //将远程github库上的代码同步到本地git库
+$ git push origin master //同步本地git库代码到对应的远程github库
+$ git pull origin master //将远程github库上的代码同步到本地git库
 
+例子（本地git库与远程github关联设置）：
+1.在目录下:$ git init //创建本地库
+2.$ git remote add origin git@github.com:xuanaiwu/wechatcms.git  //本地git库与远程github库关联
+3.$git pull origin master //将远程github库上的代码同步到本地git库，防止文件冲突
+4.$git add . //添加所以文件到本地git库
+5.$git commit -m "xx" //提交刚才添加的文件到本地git库相当于数据事务commit.
+6.$git push origin master //同步本地git库代码到对应的远程github库.
 
