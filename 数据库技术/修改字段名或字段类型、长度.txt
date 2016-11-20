@@ -1,0 +1,1 @@
+alter table bus_loaninfo  change shopOwner ifShopOwner VARCHAR(10);

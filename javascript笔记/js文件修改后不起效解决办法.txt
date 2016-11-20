@@ -1,0 +1,7 @@
+
+
+
+4.1针对eclipse使用者：
+使用eclipse的朋友们注意，由于eclipse默认的在tomcat中部署项目的位置并不在tomcat中的webapp目录下，而是在eclipse安装路径下，例如我使用的是eclipse luna ，我在tomcat中部署的项目的默认的位置为: .metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps ,你如果想找这个路径，那么，你就需要去你的workspace下去找.metadata文件夹，然后再按照上面的路径查找到你的部署的项目，手动删除后，在eclipse中从新部署项目，就可以消除浏览器不能更新的问题。
+4.1针对Myeclipse使用者：
+myeclipse中部署的项目的路径就在tomcat的安装路径中webapp文件夹下，在这个webapp文件夹中查找到你的项目，手动删除，然后在myeclipse中重新部署项目即可。

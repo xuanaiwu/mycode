@@ -1,0 +1,200 @@
+利用putty实现文件上传和下载：
+1.打开windows命令提示符窗口
+d:
+cd putty
+2：上传
+pscp d:/jdk-8u111-linux-x64.tar.gz  root@45.62.225.211:/usr/javafiles/
+pscp d:/demo.war root@45.62.225.211:/usr/javafiles/
+3:下载
+pscp root@45.62.225.211:/usr/javafiles/jdk-8u111-linux-x64.tar.gz  d:/
+pscp root@45.62.225.211:/usr/local/tomcat6/logs/demo.log  d:/  
+
+
+操作mysql(备注mysql在linux下区分大小写，windows下不区分大小写)
+1、检测是否安装
+sudo netstat -tap | grep mysql
+2、查看当前运行的mysql
+ps aux|grep mysql|grep port
+3、显示当前运行mysql的网络信息
+netstat -antp|grep mysqld| grep LISTEN
+4、进入mysql
+mysql -u root -p
+5、查看已经创建的数据库
+show databases;
+6、创建数据库：
+create database demo;
+7、设置数据库编码
+set names utf8;
+8、删除数据库：
+drop database demo;
+9、使用数据库：
+use demo;
+10、显示当前数据库的表单
+show tables; 
+11、创建表
+命令：create table <表名> ( <字段名1> <类型1> [,..<字段名n> <类型n>]);
+12、删除表
+命令：drop table  <表名>
+13、执行批处理命令（导入sql文件）
+source /usr/javafiles/dyfda.sql
+14、退出mysql
+exit;
+16、显示MYSQL的版本
+select version(); 
+17、增加表字段
+alter table 表名 add字段 类型 其他;
+alter table MyClass add passtest int(4) default '0';
+18、加索引
+alter table 表名 add index 索引名 (字段名1[，字段名2 …]);
+alter table employee add index emp_name (name);
+19、加主关键字的索引
+alter table 表名 add primary key (字段名);
+例子： mysql> alter table employee add primary key(id);
+20、加唯一限制条件的索引：mysql> alter table 表名 add unique 索引名 (字段名);
+例子： mysql> alter table employee add unique emp_name2(cardnumber);
+21、删除某个索引：mysql> alter table 表名 drop index 索引名;
+例子： mysql>alter table employee drop index emp_name;
+22、增加字段：mysql> ALTER TABLE table_name ADD field_name field_type;
+修改原字段名称及类型：mysql> ALTER TABLE table_name CHANGE old_field_name new_field_name field_type;
+23、修改字段类型：mysql>ALTER TABLE table_name MODIFY colum_name field_type new_type
+24、删除字段：MySQL ALTER TABLE table_name DROP field_name;
+25、修改表名
+rename table 原表名 to 新表名;
+rename table MyClass to YouClass;
+26、导出整个数据库
+导出文件默认是存在mysql\bin目录下
+mysqldump -u 用户名 -p 数据库名 > 导出的文件名
+mysqldump -u user_name -p 123456 database_name > outfile_name.sql
+27、导出一个表
+mysqldump -u 用户名 -p 数据库名 表名> 导出的文件名
+mysqldump -u user_name -p  123456 database_name table_name > outfile_name.sql
+
+
+
+
+
+
+管理tomcat
+/usr/local/tomcat6 #tomcat6目录
+/usr/local/tomcat6/webapps/ #项目部署目录
+/usr/local/tomcat6/logs/ #项目日志所在目录
+解压方式安装情况下，启动tomcat服务器*
+#cd /usr/local/tomcat6/bin/
+#./startup.sh
+/usr/local/tomcat6/bin/startup.sh
+解压方式安装情况下，停止tomcat服务器*
+/usr/local/tomcat6/bin/shutdown.sh
+
+
+1、安装方式情况下，启动tomcat
+sudo /etc/init.d/tomcat6 start
+2、安装方式情况下，停止Tomcat
+sudo /etc/init.d/tomcat6 stop
+3、Tomcat 配置文件路径
+Tomcat home directory : /usr/share/tomcat6
+Tomcat base directory : /var/lib/tomcat6或/etc/tomcat6
+
+配置tomcat内存
+修改tomcat配置文件。进入tomcat6的bin目录
+#cd /usr/local/tomcat6/bin/
+#vim catalina.sh
+在85行下添加
+JAVA_OPTS="-server -Xms800m -Xmx800m -XX:PermSize=64M -XX:MaxNewSize=256m -XX:MaxPermSize=128m -Djava.awt.headless=true "
+配置内存大小，修改完成后保存配置
+
+
+修改tomcat的监听端口
+cd  /usr/local/tomcat6/conf
+ls
+vim server.xml
+
+<Server port="8005" shutdown="SHUTDOWN">【停止tomcat时的端口】
+
+<Connector port="8081" protocol="HTTP/1.1"
+connectionTimeout="20000"
+redirectPort="8443" />【tomcat默认的监听端口是8080，现在改成8081】
+
+<Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />【apache+tomcat模式时访问tomcat的端口】
+
+
+linux 命令
+学习网站：http://www.runoob.com/linux/linux-command-manual.html
+1、Linux cd命令用于切换当前工作目录至 dirName(目录参数)。
+其中 dirName 表示法可为绝对路径或相对路径。若目录名称省略，则变换至使用者的 home 目录 (也就是刚 login 时所在的目录)。
+另外，"~" 也表示为 home 目录 的意思，"." 则是表示目前所在的目录，".." 则表示目前目录位置的上一层目录。
+实例：
+跳到 /usr/bin/ :
+cd /usr/bin
+2、linux ls命令用于显示指定工作目录下之内容（列出目前工作目录所含之文件及子目录)。
+实例：
+将 /bin 目录以下所有目录及文件详细资料列出 :
+ls -lR /bin
+3、linux mv 重命名
+例子：mv /usr/local/apache-tomcat-7.0.61 /usr/local/tomcat7
+4、解压程序包
+把文件解压包 /usr/local/ 目录下
+tar -zxvf apache-tomcat-7.0.61.tar.gz -C /usr/local/
+5、停止防火墙服务
+sevice iptables stop
+6、重新启动防火墙服务
+service iptables restart
+7、查看内存的命令： free  
+8、查看内存详细信息可以用 cat /proc/meminfo
+9、查看cpu使用情况可以用：ps 
+10、查看cpu型号信息可以用 cat /proc/cpuinfo
+11、查看当前所有tcp端口 netstat -ntlp
+12、Linux mkdir命令用于建立名称为 dirName 之子目录。
+例子：在工作目录下，建立一个名为 AAA 的子目录 ，mkdir AAA
+13、cp命令主要用于复制文件或目录
+
+cp -ir /usr/javafiles/dyfda.war  /usr/local/tomcat6/webapps/ 
+
+14、scp是linux系统下基于ssh登陆进行安全的远程文件拷贝命令
+例子：
+从本地复制到远程，scp d:/dyfda.war root@45.62.225.211:/usr/javafiles/
+从远程复制到本地, scp root@45.62.225.211:/usr/javafiles/dyfda.war d:/ 
+如果远程服务器防火墙有为scp命令设置了指定的端口，我们需要使用 -p 参数来设置命令的端口号，命令格式如下：
+#scp命令使用端口号 4588
+scp -p 4588 d:/dyfda.war root@45.62.225.211:/usr/javafiles/
+15、查看文件或目录权限
+ls -l
+16、修改文件或目录权限
+chmod 777 文件名
+权限列表
+-rw-------   (600) 只有所有者才有读和写的权限 
+-rw-r--r--   (644) 只有所有者才有读和写的权限，组群和其他人只有读的权限 
+-rwx------   (700) 只有所有者才有读，写，执行的权限 
+-rwxr-xr-x   (755) 只有所有者才有读，写，执行的权限，组群和其他人只有读和执行的权限 
+-rwx--x--x   (711) 只有所有者才有读，写，执行的权限，组群和其他人只有执行的权限 
+-rw-rw-rw-   (666) 每个人都有读写的权限 
+-rwxrwxrwx   (777) 每个人都有读写和执行的权限
+17、Linux rm命令用于删除一个文件或者目录。
+rm -r dyfda.war
+
+
+
+
+配置jdk环境变量
+export JAVA_HOME=/usr/lib/jvm/jdk-8-oracle
+export JRE_HOME=${JAVA_HOME}/jre  
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib  
+export PATH=${JAVA_HOME}/bin:$PATH
+检查配置
+echo $JAVA_HOME
+echo $PATH
+
+tomcat not found jdk解决方法：
+sudo vi /etc/default/tomcat6
+打开JAVA_HOME=.....的注释，并正确配置JAVA_HOME，保存，退出
+
+
+web服务访问地址：
+http://45.62.225.211:8080/demo
+
+vi 或 vim 
+
+1、vi filename :打开或新建文件，并将光标置于第一行首 
+2、按下i键：编辑或插入数据
+3、按下shit+: ->表示可以进行命令输入 
+4、q! —>表示不保存退出。
+5、w ->保存当前文件。

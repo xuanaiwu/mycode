@@ -1,0 +1,12 @@
+从服务器接收到json数组，如[{"amount":1,"name":"测试加盟商仓库2"},{"amount":1,"name":"测试加盟商仓库1"},{"amount":1,"name":"测试仓库3"}] ，生成表格并把数据添加到表格中？？
+
+
+
+var JsonData==$.parseJSON(Json字符串);
+
+var html=""
+for(var i=0;i<JsonData.lenght;i++){
+ html+="  <tr > <td>"+JsonData[i]["amount"]+"<td> <tr> "
+}
+
+$("#tableId").append(html)

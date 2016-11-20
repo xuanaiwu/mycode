@@ -1,0 +1,78 @@
+这是一个利用jquery动态插入输入内容的代码。
+
+html代码：
+
+<div title="分表2" class="ui-edit" style="padding:20px;" >
+<div id="optionContainer" class="ftitle">经验实体信息(必填，多个网商店铺需加行)</div> 
+<div id="option0" class="ui-edit" style="padding-top:5px">
+<div class="fitem">
+<label>经营网店名称:</label> 
+<input class="easyui-validatebox" type="text" name="shopName0" data-options="required:true,validType:'length[1,100]'">
+<label>所属电商平台名称:</label> 
+<input class="easyui-validatebox" type="text" name="platformName0" data-options="required:true,validType:'length[1,100]'">
+<label>网店级别（仅限淘宝及天猫商户）:</label> 
+<input class="easyui-validatebox" type="text" name="shopLevel0" data-options="required:true,validType:'length[1,100]'">
+<label>网店持续经营年限:</label> 
+<input class="easyui-validatebox" type="text" name="operatingPeriod0" data-options="required:true,validType:'length[1,100]'"> 
+</div>
+<div class="fitem">
+<label>网店实际所有者（个人名称或公司名称):</label> 
+<input class="easyui-validatebox" type="text" name="shopOwner0" data-options="required:true,validType:'length[1,100]'">
+<label>子帐号:</label> 
+<input class="easyui-validatebox" type="text" name="subAccount0" data-options="required:true,validType:'length[1,100]'">
+<label>密码:</label> 
+<input class="easyui-validatebox" type="text" name="sbuPassword0" data-options="required:true,validType:'length[1,100]'">
+<label>主营业务及主要产品、品牌:</label> 
+<input class="easyui-validatebox" type="text" name="businessOpera0" data-options="required:true,validType:'length[1,200]'"> 
+</div>
+<div class="fitem">
+<label>经营地址（如有）:</label> 
+<input class="easyui-validatebox" type="text" name="businessAddress0" >
+<label>仓库地址:</label> 
+<input class="easyui-validatebox" type="text" name="warehouseAddress0" >
+<label>经营实体上年度销售/营业收入:</label> 
+<input class="easyui-validatebox" type="text" name="salesIncome0" data-options="required:true,validType:'length[1,100]'">
+<label>经营实体总负债:</label> 
+<input class="easyui-validatebox" type="text" name="totalLiability0" data-options="required:true,validType:'length[1,100]'"> 
+</div>
+
+<div class="fitem">
+<label>银行负债:</label> 
+<input class="easyui-validatebox" type="text" name="bankLiabilities0" data-options="required:true,validType:'length[1,100]'">
+<label>上年度净利润:</label> 
+<input class="easyui-validatebox" type="text" name="netProfit0" data-options="required:true,validType:'length[1,100]'">
+
+</div>
+<br />
+<div style="text-align:center;"> 
+<a href="#" onclick="addRow()">添加一行</a> 
+</div> 
+</div> 
+</div>
+
+ 
+
+javascript代码：
+
+//添加行 
+function addRow(){ 
+rowCount++;
+var newRow='<br/><div id="option'+rowCount+'"class="ui-edit" style="padding-top:5px"><div class="fitem">'+
+'<label>经营网店名称:</label><input class="easyui-validatebox" type="text" name="shopName'+rowCount+'">'+
+'<label>所属电商平台名称:</label><input class="easyui-validatebox" type="text" name="platformName'+rowCount+'"><label>网店级别（仅限淘宝及天猫商户）:</label><input class="easyui-validatebox" type="text" name="shopLevel'+rowCount+'"><label>网店持续经营年限:</label><input class="easyui-validatebox" type="text" name="operatingPeriod'+rowCount+'"></div>'+
+'<div class="fitem"><label>网店实际所有者（个人名称或公司名称):</label><input class="easyui-validatebox" type="text" name="shopOwner'+rowCount+'"><label>子帐号:</label> <input class="easyui-validatebox" type="text" name="subAccount'+rowCount+'"><label>密码:</label> <input class="easyui-validatebox" type="text" name="sbuPassword'+rowCount+'"><label>主营业务及主要产品、品牌:</label><input class="easyui-validatebox" type="text" name="businessOpera'+rowCount+'"></div>'+
+'<div class="fitem"><label>经营地址（如有）:</label><input class="easyui-validatebox" type="text" name="businessAddress'+rowCount+'" ><label>仓库地址:</label><input class="easyui-validatebox" type="text" name="warehouseAddress'+rowCount+'" ><label>经营实体上年度销售/营业收入:</label><input class="easyui-validatebox" type="text" name="salesIncome'+rowCount+'"><label>经营实体总负债:</label> <input class="easyui-validatebox" type="text" name="totalLiability'+rowCount+'"></div>'+
+'<div class="fitem"><label>银行负债:</label> <input class="easyui-validatebox" type="text" name="bankLiabilities'+rowCount+'" ><label>上年度净利润:</label><input class="easyui-validatebox" type="text" name="netProfit'+rowCount+'"></div>'+
+'<br /><div style="text-align:center;"><a href="#" onclick=delRow('+rowCount+')>删除</a></div></div>';
+
+//var newRow='<tr id="option'+rowCount+'"><td class="oz-form-topLabel">选项'+rowCount+'：</td><td class="oz-property" ><input type="text" style="width:300px"></td><td><a href="#" onclick=delRow('+rowCount+')>删除</a></td></tr>';
+
+$('#optionContainer').append(newRow);
+$('#rowCount').val(rowCount);
+} 
+//删除行 
+function delRow(rowIndex){ 
+$("#option"+rowIndex).remove(); 
+rowCount--;
+$('#rowCount').val(rowCount);
+}

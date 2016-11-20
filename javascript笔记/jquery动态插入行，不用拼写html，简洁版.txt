@@ -1,0 +1,104 @@
+这个一个利用jquery实现动态插入输入行效果小功能，不用在javascript里拼写html字符串，更简洁、高效。
+
+html代码：
+
+<div class="fitem"> 
+<table id="tblData">
+<tr>
+<td>保证人姓名</td>
+<td>证件号码</td>
+<td>工作单位</td>
+<td>职务</td>
+<td>联系电话</td>
+<td>婚姻状况</td>
+<td>家庭地址</td>
+<td>月收入情况</td>
+<td>资产总额</td>
+<td>负债总额</td>
+</tr>
+<tr id="tRow0">
+<td>
+<input id="guaranterName" name="guaranterName" style="width:89px">
+</td>
+<td>
+<input id="guaranterCard" name="guaranterCard" style="width:89px">
+</td>
+<td>
+<input id="guaranterEmployer" name="guaranterEmployer" style="width:89px">
+</td>
+<td>
+<input id="guaranterDuties" name="guaranterDuties" style="width:89px">
+</td>
+<td>
+<input id="guaranterPhone" name="guaranterPhone" style="width:89px">
+</td>
+<td>
+<select id="guaranterMaritalStatus" name="guaranterMaritalStatus" style="width:89px">
+<option value=""></option>
+<option value="已婚">已婚</option>
+<option value="未婚">未婚</option>
+<option value="离异">离异</option>
+<option value="丧偶">丧偶</option>
+<option value="其他">其他</option>
+</select>
+</td>
+<td>
+<input id="guaranterHouseAddress" name="guaranterHouseAddress" style="width:89px">
+</td>
+<td>
+<input id="guaranterMonthlyIncome" name="guaranterMonthlyIncome" style="width:89px">
+</td>
+<td>
+<input id="guaranterValues" name="guaranterValues" style="width:89px">
+</td>
+<td>
+<input id="guaranterTotalLiabilities" name="guaranterTotalLiabilities" style="width:89px">
+</td>
+</tr>
+</table>
+<br />
+<div style="text-align:center;"> 
+<a href="#" onclick="addGuaranterRow()">添加一行</a> 
+</div>
+
+</div>
+
+ 
+
+javascript代码：
+
+//添加行
+function addGuaranterRow(){
+var num=$("#guaranterRowCount").val();
+num=parseInt(num);
+num++;//点击自加
+var str='<td><a href="#" onclick=delGuaranterRow('+num+')>删除</a></td>';
+$("#tRow0").clone(true).attr("id","tRow"+num).appendTo("#tblData");
+$("#tRow"+num+"td").each(function(){
+$(this).find("input[type='text']").val("");//清空数据
+$(this).find("input[name='guaranterName']").attr("id","guaranterName"+num).attr("name","guaranterName"+num);
+$(this).find("input[name='guaranterCard']").attr("id","guaranterCard"+num).attr("name","guaranterCard"+num);
+$(this).find("input[name='guaranterEmployer']").attr("id","guaranterEmployer"+num).attr("name","guaranterEmployer"+num);
+$(this).find("input[name='guaranterDuties']").attr("id","guaranterDuties"+num).attr("name","guaranterDuties"+num);
+$(this).find("input[name='guaranterPhone']").attr("id","guaranterPhone"+num).attr("name","guaranterPhone"+num);
+$(this).find("input[name='guaranterMaritalStatus']").attr("id","guaranterMaritalStatus"+num).attr("name","guaranterMaritalStatus"+num);
+$(this).find("input[name='guaranterHouseAddress']").attr("id","guaranterHouseAddress"+num).attr("name","guaranterHouseAddress"+num);
+$(this).find("input[name='guaranterMonthlyIncome']").attr("id","guaranterMonthlyIncome"+num).attr("name","guaranterMonthlyIncome"+num);
+$(this).find("input[name='guaranterValues']").attr("id","guaranterValues"+num).attr("name","guaranterValues"+num);
+$(this).find("input[name='guaranterTotalLiabilities']").attr("id","guaranterTotalLiabilities"+num).attr("name","guaranterTotalLiabilities"+num);
+});
+$("#guaranterRowCount").val(num);//重新赋值
+$("#tRow"+num).append(str);
+}
+//删除行
+function delGuaranterRow(rowIndex){
+var num=$("#guaranterRowCount").val();
+num=parseInt(num);
+if(rowIndex>0&&num>0){//判断是不是第一行
+$("#tRow"+rowIndex).remove();
+num--;//删除后要自减
+$('#guaranterRowCount').val(num);
+}else{
+alert("这是第一行了！");
+}
+}

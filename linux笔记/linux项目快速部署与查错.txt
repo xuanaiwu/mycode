@@ -1,0 +1,16 @@
+1、上传：pscp d:/demo.war root@45.62.225.211:/usr/javafiles/
+2、停止tomcat:/usr/local/tomcat6/bin/shutdown.sh
+3、覆盖部署文件：cp -ir /usr/javafiles/demo.war  /usr/local/tomcat6/webapps/
+4、启动tomcat: /usr/local/tomcat6/bin/startup.sh
+5、查看日志文件列表：
+1>cd /usr/local/tomcat6/logs/
+2>ls -l
+5、下载日志文件：pscp root@45.62.225.211:/usr/local/tomcat6/logs/demo.log  d:/ 
+
+备注：
+/usr/local/tomcat6 #tomcat6目录
+/usr/local/tomcat6/webapps/ #项目部署目录
+/usr/local/tomcat6/logs/ #项目日志所在目录
+
+web服务访问地址：
+http://45.62.225.211:8080/demo
