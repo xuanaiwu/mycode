@@ -117,7 +117,7 @@ redirectPort="8443" />【tomcat默认的监听端口是8080，现在改成8081】
 <Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />【apache+tomcat模式时访问tomcat的端口】
 
 
-linux 命令
+linux 常用命令
 学习网站：http://www.runoob.com/linux/linux-command-manual.html
 1、Linux cd命令用于切换当前工作目录至 dirName(目录参数)。
 其中 dirName 表示法可为绝对路径或相对路径。若目录名称省略，则变换至使用者的 home 目录 (也就是刚 login 时所在的目录)。
@@ -171,7 +171,7 @@ chmod 777 文件名
 17、Linux rm命令用于删除一个文件或者目录。
 rm -r dyfda.war
 
-
+18、ifconfig 查看ip和网卡信息
 
 
 配置jdk环境变量
@@ -198,3 +198,5 @@ vi 或 vim
 3、按下shit+: ->表示可以进行命令输入 
 4、q! —>表示不保存退出。
 5、w ->保存当前文件。
+6、wq 保存并退出
+7、按下esc键->表示退出编辑
