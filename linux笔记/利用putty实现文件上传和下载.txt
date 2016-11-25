@@ -1,0 +1,9 @@
+1.打开windows命令提示符窗口
+d:
+cd putty
+2：上传
+pscp d:/jdk-8u111-linux-x64.tar.gz  root@45.62.225.211:/usr/javafiles/
+pscp d:/demo.war root@45.62.225.211:/usr/javafiles/
+3:下载
+pscp root@45.62.225.211:/usr/javafiles/jdk-8u111-linux-x64.tar.gz  d:/
+pscp root@45.62.225.211:/usr/local/tomcat6/logs/demo.log  d:/ 

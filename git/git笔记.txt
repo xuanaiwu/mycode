@@ -37,4 +37,7 @@ $ git pull origin master //将远程github库上的代码同步到本地git库
 5.$git commit -m "xx" //提交刚才添加的文件到本地git库相当于数据事务commit.
 6.$git push origin master //同步本地git库代码到对应的远程github库.
 7.$git status 查看当前git库状态
+8.git log 查看更新日志	按q退出
+9.git checkout 77e3873 git checkout master 回滚版本
+10.git reset --hard 77e3873 回滚版本第二种方法
 

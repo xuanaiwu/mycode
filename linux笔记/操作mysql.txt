@@ -1,0 +1,58 @@
+操作mysql(备注mysql在linux下区分大小写，windows下不区分大小写)
+1、检测是否安装
+sudo netstat -tap | grep mysql
+2、查看当前运行的mysql
+ps aux|grep mysql|grep port
+3、显示当前运行mysql的网络信息
+netstat -antp|grep mysqld| grep LISTEN
+4、进入mysql
+mysql -u root -p
+5、查看已经创建的数据库
+show databases;
+6、创建数据库：
+create database demo;
+7、设置数据库编码
+set names utf8;
+8、删除数据库：
+drop database demo;
+9、使用数据库：
+use demo;
+10、显示当前数据库的表单
+show tables; 
+11、创建表
+命令：create table <表名> ( <字段名1> <类型1> [,..<字段名n> <类型n>]);
+12、删除表
+命令：drop table  <表名>
+13、执行批处理命令（导入sql文件）
+source /usr/javafiles/dyfda.sql
+14、退出mysql
+exit;
+16、显示MYSQL的版本
+select version(); 
+17、增加表字段
+alter table 表名 add字段 类型 其他;
+alter table MyClass add passtest int(4) default '0';
+18、加索引
+alter table 表名 add index 索引名 (字段名1[，字段名2 …]);
+alter table employee add index emp_name (name);
+19、加主关键字的索引
+alter table 表名 add primary key (字段名);
+例子： mysql> alter table employee add primary key(id);
+20、加唯一限制条件的索引：mysql> alter table 表名 add unique 索引名 (字段名);
+例子： mysql> alter table employee add unique emp_name2(cardnumber);
+21、删除某个索引：mysql> alter table 表名 drop index 索引名;
+例子： mysql>alter table employee drop index emp_name;
+22、增加字段：mysql> ALTER TABLE table_name ADD field_name field_type;
+修改原字段名称及类型：mysql> ALTER TABLE table_name CHANGE old_field_name new_field_name field_type;
+23、修改字段类型：mysql>ALTER TABLE table_name MODIFY colum_name field_type new_type
+24、删除字段：MySQL ALTER TABLE table_name DROP field_name;
+25、修改表名
+rename table 原表名 to 新表名;
+rename table MyClass to YouClass;
+26、导出整个数据库
+导出文件默认是存在mysql\bin目录下
+mysqldump -u 用户名 -p 数据库名 > 导出的文件名
+mysqldump -u user_name -p 123456 database_name > outfile_name.sql
+27、导出一个表
+mysqldump -u 用户名 -p 数据库名 表名> 导出的文件名
+mysqldump -u user_name -p  123456 database_name table_name > outfile_name.sql
